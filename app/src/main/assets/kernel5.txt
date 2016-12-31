@@ -1,0 +1,868 @@
+HOSTCC  scripts/basic/fixdep
+
+VM236:2   HOSTCC  scripts/kconfig/conf.o
+
+VM236:2   HOSTCC  scripts/kconfig/zconf.tab.o
+
+VM236:2   HOSTLD  scripts/kconfig/conf
+
+VM236:2 scripts/kconfig/conf  --silentoldconfig Kconfig
+
+VM236:2 *
+* Restart config...
+*
+*
+* General setup
+*
+Cross-compiler tool prefix (CROSS_COMPILE) [] 
+Compile also drivers which will not load (COMPILE_TEST) [N/y/?] n
+Local version - append to kernel release (LOCALVERSION) [] 
+Automatically append version information to the version string (LOCALVERSION_AUTO) [N/y/?] n
+Kernel compression mode
+  1. Gzip (KERNEL_GZIP)
+  2. Bzip2 (KERNEL_BZIP2)
+  3. LZMA (KERNEL_LZMA)
+  4. XZ (KERNEL_XZ)
+  5. LZO (KERNEL_LZO)
+> 6. LZ4 (KERNEL_LZ4)
+choice[1-6?]: 6
+Default hostname (DEFAULT_HOSTNAME) [(none)] (none)
+Support for paging of anonymous memory (swap) (SWAP) [Y/n/?] y
+System V IPC (SYSVIPC) [Y/n/?] y
+POSIX Message Queues (POSIX_MQUEUE) [Y/n/?] y
+Enable process_vm_readv/writev syscalls (CROSS_MEMORY_ATTACH) [Y/n/?] y
+uselib syscall (USELIB) [Y/n/?] y
+Auditing support (AUDIT) [Y/n/?] y
+Kernel .config support (IKCONFIG) [N/y/?] n
+Kernel log buffer size (16 => 64KB, 17 => 128KB) (LOG_BUF_SHIFT) [18] 18
+Temporary per-CPU NMI log buffer size (12 => 4KB, 13 => 8
+VM236:2 KB) (NMI_LOG_BUF_SHIFT) [13] 13
+Automatic process group scheduling (SCHED_AUTOGROUP) [N/y/?] n
+Enable deprecated sysfs features to support old userspace tools (SYSFS_DEPRECATED) [N/y/?] n
+Kernel->user space relay support (formerly relayfs) (RELAY) [Y/?] y
+Initial RAM filesystem and RAM disk (initramfs/initrd) support (BLK_DEV_INITRD) [Y/n/?] y
+  Initramfs source file(s) (INITRAMFS_SOURCE) [] 
+  Support initial ramdisks compressed using gzip (RD_GZIP) [Y/n/?] y
+  Support initial ramdisks compressed using bzip2 (RD_BZIP2) [Y/n/?] y
+  Support initial ramdisks compressed using LZMA (RD_LZMA) [Y/n/?] y
+  Support initial ramdisks compressed using XZ (RD_XZ) [Y/n/?] y
+  Support initial ramdisks compressed using LZO (RD_LZO) [Y/n/?] y
+  Support initial ramdisks compressed using LZ4 (RD_LZ4) [Y/n/?] y
+Compiler optimization level
+> 1. Optimize for performance (CC_OPTIMIZE_FOR_PERFORMANCE)
+  2. Optimize for size (CC_OPTIMIZE_FOR_SIZE)
+choice[1-2]: 1
+Enable bpf() system call (BPF_SYSCALL) [N/y/?] n
+Enabl
+VM236:2 e userfaultfd() system call (USERFAULTFD) [N/y/?] n
+Embedded system (EMBEDDED) [N/y/?] n
+Disable heap randomization (COMPAT_BRK) [N/y/?] n
+Choose SLAB allocator
+  1. SLAB (SLAB)
+> 2. SLUB (Unqueued Allocator) (SLUB)
+choice[1-2?]: 2
+SLAB freelist randomization (SLAB_FREELIST_RANDOM) [Y/n/?] y
+Profiling support (PROFILING) [Y/n/?] y
+OProfile system profiling (OPROFILE) [N/y/?] n
+Optimize very unlikely/likely branches (JUMP_LABEL) [Y/n/?] y
+  Static key selftest (STATIC_KEYS_SELFTEST) [N/y/?] n
+Stack Protector buffer overflow detection
+> 1. None (CC_STACKPROTECTOR_NONE)
+  2. Regular (CC_STACKPROTECTOR_REGULAR)
+  3. Strong (CC_STACKPROTECTOR_STRONG)
+choice[1-3?]: 1
+Use a virtually-mapped stack (VMAP_STACK) [Y/n/?] (NEW) 
+VM236:2 
+
+VM236:2 *
+* Bus options (PCI etc.)
+*
+PCI support (PCI) [Y/n/?] y
+  Support mmconfig PCI config space access (PCI_MMCONFIG) [Y/n] y
+  PCI Express Port Bus support (PCIEPORTBUS) [Y/n/?] y
+    PCI Express Hotplug driver (HOTPLUG_PCI_PCIE) [N/y/?] n
+    Root Port Advanced Error Reporting support (PCIEAER) [Y/n/?] y
+      PCI Express ECRC settings control (PCIE_ECRC) [N/y/?] n
+      PCIe AER error injector support (PCIEAER_INJECT) [N/y/?] n
+    PCI Express ASPM control (PCIEASPM) [Y/?] y
+      Debug PCI Express ASPM (PCIEASPM_DEBUG) [N/y/?] n
+      Default ASPM policy
+      > 1. BIOS default (PCIEASPM_DEFAULT)
+        2. Powersave (PCIEASPM_POWERSAVE)
+        3. Performance (PCIEASPM_PERFORMANCE)
+      choice[1-3]: 1
+    PCIe Downstream Port Containment support (PCIE_DPC) [N/y/?] n
+    PCIe Precision Time Measurement support (PCIE_PTM) [N/y/?] (NEW) 
+VM236:2 
+
+VM236:2   Message Signaled Interrupts (MSI and MSI-X) (PCI_MSI) [Y/n/?] y
+  Enable PCI resource re-allocation detection (PCI_REALLOC_ENABLE_AUTO) [N/y/?] n
+  PCI Stub driver (PCI_STUB) [N/y/?] n
+  Interrupts on hypertransport devices (HT_IRQ) [Y/n/?] y
+PCI IOV support (PCI_IOV) [N/y/?] n
+PCI PRI support (PCI_PRI) [Y/n/?] y
+PCI PASID support (PCI_PASID) [Y/n/?] y
+RapidIO support (RAPIDIO) [N/y/?] n
+
+VM236:2 Mark VGA/VBE/EFI FB as generic system framebuffer (X86_SYSFB) [N/y/?] n
+*
+* TCP: advanced congestion control
+*
+TCP: advanced congestion control (TCP_CONG_ADVANCED) [Y/n/?] y
+  Binary Increase Congestion (BIC) control (TCP_CONG_BIC) [N/y/?] n
+  CUBIC TCP (TCP_CONG_CUBIC) [Y/n/?] y
+  TCP Westwood+ (TCP_CONG_WESTWOOD) [N/y/?] n
+  H-TCP (TCP_CONG_HTCP) [N/y/?] n
+  High Speed TCP (TCP_CONG_HSTCP) [N/y/?] n
+VM236:2 
+  TCP-Hybla congestion control algorithm (TCP_CONG_HYBLA) [N/y/?] n
+  TCP Vegas (TCP_CONG_VEGAS) [N/y/?] n
+  TCP NV (TCP_CONG_NV) [N/y/?] n
+  Scalable TCP (TCP_CONG_SCALABLE) [N/y/?] n
+  TCP Low Priority (TCP_CONG_LP) [N/y/?] n
+  TCP Veno (TCP_CONG_VENO) [N/y/?] n
+  YeAH TCP (TCP_CONG_YEAH) [N/y/?] n
+  TCP Illinois (TCP_CONG_ILLINOIS) [N/y/?] n
+  DataCenter TCP (DCTCP) (TCP_CONG_DCTCP) [N/y/?] n
+  CAIA Delay-Gradient (CDG) (TCP_CONG_CDG) [N/y/?] n
+  BBR TCP (TCP_CONG_BBR) [N/y/?] (NEW) 
+VM236:2 
+
+VM236:2   Default TCP congestion control
+  > 1. Cubic (DEFAULT_CUBIC)
+    2. Reno (DEFAULT_RENO)
+  choice[1-2?]: 1
+
+VM236:2 *
+* Multifunction device drivers
+*
+ChromeOS Embedded Controller (MFD_CROS_EC) [N/y/?] n
+Samsung Exynos SoC Low Power Audio Subsystem (MFD_EXYNOS_LPASS) [N/y/?] (NEW) 
+VM236:2 
+
+VM236:2 HTC PASIC3 LED/DS1WM chip support (HTC_PASIC3) [N/y/?] n
+
+VM236:2 Intel ICH LPC (LPC_ICH) [N/y/?] n
+Intel SCH LPC (LPC_SCH) [N/y/?] n
+Intel Low Power Subsystem support in ACPI mode (MFD_INTEL_LPSS_ACPI) [N/y/?] n
+Intel Low Power Subsystem support in PCI mode (MFD_INTEL_LPSS_PCI) [N/y/?] n
+Janz CMOD-IO PCI MODULbus Carrier Board (MFD_JANZ_CMODIO) [N/y/?] n
+Kontron module PLD device (MFD_KEMPLD) [N/y/?] n
+
+VM236:2 MediaTek MT6397 PMIC Support (MFD_MT6397) [N/y/?] n
+RDC R-321x southbridge (MFD_RDC321X) [N/y/?] n
+Realtek PCI-E card reader (MFD_RTSX_PCI) [N/y/?] n
+Silicon Motion SM501 (MFD_SM501) [N/y/?] n
+
+VM236:2 ST-Ericsson ABX500 Mixed Signal Circuit register functions (ABX500_CORE) [N/y/?] n
+System Controller Register R/W Based on Regmap (MFD_SYSCON) [N/y/?] n
+
+VM236:2 TI ADC / Touch Screen chip support (MFD_TI_AM335X_TSCADC) [N/y/?] n
+
+VM236:2 VIA VX855/VX875 integrated south bridge (MFD_VX855) [N/y/?] n
+
+VM236:2 *
+* Intel ISH HID support
+*
+Intel Integrated Sensor Hub (INTEL_ISH_HID) [N/y/?] (NEW) 
+VM236:2 
+
+VM236:2 *
+* Tracers
+*
+Tracers (FTRACE) [Y/n/?] y
+  Kernel Function Tracer (FUNCTION_TRACER) [N/y/?] n
+  Interrupts-off Latency Tracer (IRQSOFF_TRACER) [N/y/?] n
+  Scheduling Latency Tracer (SCHED_TRACER) [N/y/?] n
+  Tracer to detect hardware latencies (like SMIs) (HWLAT_TRACER) [N/y/?] (NEW) 
+VM236:2 
+
+VM236:2   Trace syscalls (FTRACE_SYSCALLS) [N/y/?] n
+  Create a snapshot trace buffer (TRACER_SNAPSHOT) [N/y/?] n
+  Branch Profiling
+  > 1. No branch profiling (BRANCH_PROFILE_NONE)
+
+VM236:2     2. Trace likely/unlikely profiler (PROFILE_ANNOTATED_BRANCHES)
+
+VM236:2     3. Profile all if conditionals (PROFILE_ALL_BRANCHES)
+
+VM236:2   choice[1-3?]: 1
+  Trace max stack (STACK_TRACER) [N/y/?] n
+  Support for tracing block IO actions (BLK_DEV_IO_TRACE) [Y/n/?] y
+VM236:2 
+  Enable uprobes-based dynamic events (UPROBE_EVENT) [N/y/?] n
+
+VM236:2   Perform a startup test on ftrace (FTRACE_STARTUP_TEST) [N/y/?] n
+
+VM236:2   Memory mapped IO tracing (MMIOTRACE) [N/y/?] n
+
+VM236:2   Histogram triggers (HIST_TRIGGERS) [N/y/?] n
+
+VM236:2   Add tracepoint that benchmarks tracepoints (TRACEPOINT_BENCHMARK) [N/y/?] n
+
+VM236:2   Ring buffer benchmark stress tester (RING_BUFFER_BENCHMARK) [N/y/?] n
+
+VM236:2   Ring buffer startup self test (RING_BUFFER_STARTUP_TEST) [N/y/?] n
+
+VM236:2   Show enum mappings for trace events (TRACE_ENUM_MAP_FILE) [N/y/?] n
+
+VM236:2 #
+# configuration written to .config
+#
+
+VM236:2 
+
+VM236:2   SYSTBL  arch/x86/entry/syscalls/../../include/generated/asm/syscalls_32.h
+
+VM236:2   SYSHDR  arch/x86/entry/syscalls/../../include/generated/asm/unistd_32_ia32.h
+
+VM236:2   SYSHDR  arch/x86/entry/syscalls/../../include/generated/asm/unistd_64_x32.h
+
+VM236:2   SYSTBL  arch/x86/entry/syscalls/../../include/generated/asm/syscalls_64.h
+
+VM236:2   SYSHDR  arch/x86/entry/syscalls/../../include/generated/uapi/asm/unistd_32.h
+
+VM236:2   SYSHDR  arch/x86/entry/syscalls/../../include/generated/uapi/asm/unistd_64.h
+
+VM236:2   SYSHDR  arch/x86/entry/syscalls/../../include/generated/uapi/asm/unistd_x32.h
+
+VM236:2   HOSTCC  arch/x86/tools/relocs_32.o
+
+VM236:2   HOSTCC  arch/x86/tools/relocs_64.o
+
+VM236:2   HOSTCC  arch/x86/tools/relocs_common.o
+
+VM236:2   HOSTLD  arch/x86/tools/relocs
+
+VM236:2   CHK     include/config/kernel.release
+
+VM236:2   UPD     include/config/kernel.release
+
+VM236:2   CHK     include/generated/uapi/linux/version.h
+
+VM236:2   UPD     include/generated/uapi/linux/version.h
+
+VM236:2   CHK     include/generated/utsrelease.h
+
+VM236:2   UPD     include/generated/utsrelease.h
+
+VM236:2   CC      kernel/bounds.s
+
+VM236:2   CHK     include/generated/bounds.h
+
+VM236:2   CHK     include/generated/timeconst.h
+
+VM236:2   CC      arch/x86/kernel/asm-offsets.s
+
+VM236:2   CHK     include/generated/asm-offsets.h
+
+VM236:2   UPD     include/generated/asm-offsets.h
+
+VM236:2   CALL    scripts/checksyscalls.sh
+
+VM236:2   CC      scripts/mod/empty.o
+
+VM236:2   MKELF   scripts/mod/elfconfig.h
+
+VM236:2   HOSTCC  scripts/mod/modpost.o
+
+VM236:2   CC      scripts/mod/devicetable-offsets.s
+
+VM236:2   GEN     scripts/mod/devicetable-offsets.h
+
+VM236:2   HOSTCC  scripts/mod/file2alias.o
+
+VM236:2   HOSTCC  scripts/mod/sumversion.o
+
+VM236:2   HOSTLD  scripts/mod/modpost
+
+VM236:2   CC      init/main.o
+
+VM236:2   CHK     include/generated/compile.h
+
+VM236:2   CC      init/version.o
+
+VM236:2   CC      init/do_mounts.o
+
+VM236:2   CC      init/do_mounts_initrd.o
+
+VM236:2   LD      init/mounts.o
+
+VM236:2   CC      init/initramfs.o
+
+VM236:2   CC      init/calibrate.o
+
+VM236:2   CC      init/init_task.o
+
+VM236:2   LD      init/built-in.o
+
+VM236:2   GEN     usr/initramfs_data.cpio.gz
+
+VM236:2   AS      usr/initramfs_data.o
+
+VM236:2   LD      usr/built-in.o
+
+VM236:2   AS      arch/x86/entry/entry_64.o
+
+VM236:2   AS      arch/x86/entry/thunk_64.o
+
+VM236:2   CC      arch/x86/entry/syscall_64.o
+
+VM236:2   CC      arch/x86/entry/common.o
+
+VM236:2   CC      arch/x86/entry/vdso/vma.o
+
+VM236:2   LDS     arch/x86/entry/vdso/vdso.lds
+
+VM236:2   AS      arch/x86/entry/vdso/vdso-note.o
+
+VM236:2   CC      arch/x86/entry/vdso/vclock_gettime.o
+
+VM236:2   CC      arch/x86/entry/vdso/vgetcpu.o
+
+VM236:2   VDSO    arch/x86/entry/vdso/vdso64.so.dbg
+
+VM236:2   OBJCOPY arch/x86/entry/vdso/vdso64.so
+
+VM236:2   VDSO2C  arch/x86/entry/vdso/vdso-image-64.c
+
+VM236:2   CC      arch/x86/entry/vdso/vdso-image-64.o
+
+VM236:2   LD      arch/x86/entry/vdso/built-in.o
+
+VM236:2   CC      arch/x86/entry/vsyscall/vsyscall_gtod.o
+
+VM236:2   CC      arch/x86/entry/vsyscall/vsyscall_64.o
+
+VM236:2   AS      arch/x86/entry/vsyscall/vsyscall_emu_64.o
+
+VM236:2   LD      arch/x86/entry/vsyscall/built-in.o
+
+VM236:2   LD      arch/x86/entry/built-in.o
+
+VM236:2   CC      arch/x86/events/core.o
+
+VM236:2   CC      arch/x86/events/amd/core.o
+
+VM236:2   CC      arch/x86/events/amd/uncore.o
+
+VM236:2   CC      arch/x86/events/amd/ibs.o
+
+VM236:2   CC      arch/x86/events/msr.o
+
+VM236:2   CC      arch/x86/events/intel/core.o
+
+VM236:2   CC      arch/x86/events/intel/bts.o
+
+VM236:2   CC      arch/x86/events/intel/cqm.o
+
+VM236:2   CC      arch/x86/events/intel/ds.o
+
+VM236:2   CC      arch/x86/events/intel/knc.o
+
+VM236:2   CC      arch/x86/events/intel/lbr.o
+
+VM236:2   CC      arch/x86/events/intel/p4.o
+
+VM236:2   CC      arch/x86/events/intel/p6.o
+
+VM236:2   CC      arch/x86/events/intel/pt.o
+
+VM236:2   CC      arch/x86/events/intel/rapl.o
+
+VM236:2   LD      arch/x86/events/intel/intel-rapl-perf.o
+
+VM236:2   CC      arch/x86/events/intel/uncore.o
+
+VM236:2   CC      arch/x86/events/intel/uncore_nhmex.o
+
+VM236:2   CC      arch/x86/events/intel/uncore_snb.o
+
+VM236:2   CC      arch/x86/events/intel/uncore_snbep.o
+
+VM236:2   LD      arch/x86/events/intel/intel-uncore.o
+
+VM236:2   CC      arch/x86/events/intel/cstate.o
+
+VM236:2   LD      arch/x86/events/intel/intel-cstate.o
+
+VM236:2   LD      arch/x86/events/intel/built-in.o
+
+VM236:2   LD      arch/x86/events/built-in.o
+
+VM236:2   CC      arch/x86/kernel/process_64.o
+
+VM236:2   CC      arch/x86/kernel/signal.o
+
+VM236:2   CC      arch/x86/kernel/traps.o
+
+VM236:2   CC      arch/x86/kernel/irq.o
+
+VM236:2   CC      arch/x86/kernel/irq_64.o
+
+VM236:2   CC      arch/x86/kernel/dumpstack_64.o
+
+VM236:2   CC      arch/x86/kernel/time.o
+
+VM236:2   CC      arch/x86/kernel/ioport.o
+
+VM236:2   CC      arch/x86/kernel/dumpstack.o
+
+VM236:2   CC      arch/x86/kernel/nmi.o
+
+VM236:2   CC      arch/x86/kernel/ldt.o
+
+VM236:2   CC      arch/x86/kernel/setup.o
+
+VM236:2   CC      arch/x86/kernel/x86_init.o
+
+VM236:2   CC      arch/x86/kernel/i8259.o
+
+VM236:2   CC      arch/x86/kernel/irqinit.o
+
+VM236:2   CC      arch/x86/kernel/jump_label.o
+
+VM236:2   CC      arch/x86/kernel/irq_work.o
+
+VM236:2   CC      arch/x86/kernel/probe_roms.o
+
+VM236:2   CC      arch/x86/kernel/sys_x86_64.o
+
+VM236:2   AS      arch/x86/kernel/mcount_64.o
+
+VM236:2   CC      arch/x86/kernel/espfix_64.o
+
+VM236:2   CC      arch/x86/kernel/ksysfs.o
+
+VM236:2   CC      arch/x86/kernel/bootflag.o
+
+VM236:2   CC      arch/x86/kernel/e820.o
+
+VM236:2   CC      arch/x86/kernel/pci-dma.o
+
+VM236:2   CC      arch/x86/kernel/quirks.o
+
+VM236:2   CC      arch/x86/kernel/topology.o
+
+VM236:2   CC      arch/x86/kernel/kdebugfs.o
+
+VM236:2   CC      arch/x86/kernel/alternative.o
+
+VM236:2   CC      arch/x86/kernel/i8253.o
+
+VM236:2   CC      arch/x86/kernel/pci-nommu.o
+
+VM236:2   CC      arch/x86/kernel/hw_breakpoint.o
+
+VM236:2   CC      arch/x86/kernel/tsc.o
+
+VM236:2   CC      arch/x86/kernel/tsc_msr.o
+
+VM236:2   CC      arch/x86/kernel/io_delay.o
+
+VM236:2   CC      arch/x86/kernel/rtc.o
+
+VM236:2   CC      arch/x86/kernel/pci-iommu_table.o
+
+VM236:2   CC      arch/x86/kernel/resource.o
+
+VM236:2   CC      arch/x86/kernel/process.o
+
+VM236:2   CC      arch/x86/kernel/acpi/boot.o
+
+VM236:2   CC      arch/x86/kernel/acpi/sleep.o
+
+VM236:2   AS      arch/x86/kernel/acpi/wakeup_64.o
+
+VM236:2   CC      arch/x86/kernel/acpi/cstate.o
+
+VM236:2   LD      arch/x86/kernel/acpi/built-in.o
+
+VM236:2   CC      arch/x86/kernel/apic/apic.o
+
+VM236:2   CC      arch/x86/kernel/apic/apic_noop.o
+
+VM236:2   CC      arch/x86/kernel/apic/ipi.o
+
+VM236:2   CC      arch/x86/kernel/apic/vector.o
+
+VM236:2   CC      arch/x86/kernel/apic/hw_nmi.o
+
+VM236:2   CC      arch/x86/kernel/apic/io_apic.o
+
+VM236:2   CC      arch/x86/kernel/apic/msi.o
+
+VM236:2   CC      arch/x86/kernel/apic/htirq.o
+
+VM236:2   CC      arch/x86/kernel/apic/apic_flat_64.o
+
+VM236:2   CC      arch/x86/kernel/apic/probe_64.o
+
+VM236:2   LD      arch/x86/kernel/apic/built-in.o
+
+VM236:2   CC      arch/x86/kernel/cpu/intel_cacheinfo.o
+
+VM236:2   CC      arch/x86/kernel/cpu/scattered.o
+
+VM236:2   CC      arch/x86/kernel/cpu/topology.o
+
+VM236:2   CC      arch/x86/kernel/cpu/common.o
+
+VM236:2   CC      arch/x86/kernel/cpu/rdrand.o
+
+VM236:2   CC      arch/x86/kernel/cpu/match.o
+
+VM236:2   CC      arch/x86/kernel/cpu/proc.o
+
+VM236:2   MKCAP   arch/x86/kernel/cpu/capflags.c
+
+VM236:2   CC      arch/x86/kernel/cpu/capflags.o
+
+VM236:2   CC      arch/x86/kernel/cpu/powerflags.o
+
+VM236:2   CC      arch/x86/kernel/cpu/bugs_64.o
+
+VM236:2   CC      arch/x86/kernel/cpu/intel.o
+
+VM236:2   CC      arch/x86/kernel/cpu/amd.o
+
+VM236:2   CC      arch/x86/kernel/cpu/centaur.o
+
+VM236:2   CC      arch/x86/kernel/cpu/mtrr/main.o
+
+VM236:2   CC      arch/x86/kernel/cpu/mtrr/if.o
+
+VM236:2   CC      arch/x86/kernel/cpu/mtrr/generic.o
+
+VM236:2   CC      arch/x86/kernel/cpu/mtrr/cleanup.o
+
+VM236:2   LD      arch/x86/kernel/cpu/mtrr/built-in.o
+
+VM236:2   CC      arch/x86/kernel/cpu/perfctr-watchdog.o
+
+VM236:2   LD      arch/x86/kernel/cpu/built-in.o
+
+VM236:2   CC      arch/x86/kernel/fpu/init.o
+
+VM236:2   CC      arch/x86/kernel/fpu/bugs.o
+
+VM236:2   CC      arch/x86/kernel/fpu/core.o
+
+VM236:2   CC      arch/x86/kernel/fpu/regset.o
+
+VM236:2   CC      arch/x86/kernel/fpu/signal.o
+
+VM236:2   CC      arch/x86/kernel/fpu/xstate.o
+
+VM236:2   LD      arch/x86/kernel/fpu/built-in.o
+
+VM236:2   CC      arch/x86/kernel/ptrace.o
+
+VM236:2   CC      arch/x86/kernel/step.o
+
+VM236:2   CC      arch/x86/kernel/i8237.o
+
+VM236:2   CC      arch/x86/kernel/stacktrace.o
+
+VM236:2   CC      arch/x86/kernel/reboot.o
+
+VM236:2   CC      arch/x86/kernel/early-quirks.o
+
+VM236:2   CC      arch/x86/kernel/trace_clock.o
+
+VM236:2   CC      arch/x86/kernel/machine_kexec_64.o
+
+VM236:2   AS      arch/x86/kernel/relocate_kernel_64.o
+
+VM236:2   CC      arch/x86/kernel/crash.o
+
+VM236:2   CC      arch/x86/kernel/crash_dump_64.o
+
+VM236:2   CC      arch/x86/kernel/doublefault.o
+
+VM236:2   CC      arch/x86/kernel/early_printk.o
+
+VM236:2   CC      arch/x86/kernel/hpet.o
+
+VM236:2   CC      arch/x86/kernel/amd_nb.o
+
+VM236:2   CC      arch/x86/kernel/pcspeaker.o
+
+VM236:2   CC      arch/x86/kernel/check.o
+
+VM236:2   CC      arch/x86/kernel/pci-swiotlb.o
+
+VM236:2   CC      arch/x86/kernel/sysfb.o
+
+VM236:2   CC      arch/x86/kernel/perf_regs.o
+
+VM236:2   CC      arch/x86/kernel/tracepoint.o
+
+VM236:2   CC      arch/x86/kernel/unwind_frame.o
+
+VM236:2   CC      arch/x86/kernel/audit_64.o
+
+VM236:2   CC      arch/x86/kernel/mmconf-fam10h_64.o
+
+VM236:2   CC      arch/x86/kernel/vsmp_64.o
+
+VM236:2   LD      arch/x86/kernel/built-in.o
+
+VM236:2   AS      arch/x86/kernel/head_64.o
+
+VM236:2   CC      arch/x86/kernel/head64.o
+
+VM236:2   CC      arch/x86/kernel/ebda.o
+
+VM236:2   CC      arch/x86/kernel/platform-quirks.o
+
+VM236:2   LDS     arch/x86/kernel/vmlinux.lds
+
+VM236:2   CC      arch/x86/mm/init.o
+
+VM236:2   CC      arch/x86/mm/init_64.o
+
+VM236:2   CC      arch/x86/mm/fault.o
+
+VM236:2   CC      arch/x86/mm/ioremap.o
+
+VM236:2   CC      arch/x86/mm/extable.o
+
+VM236:2   CC      arch/x86/mm/pageattr.o
+
+VM236:2   CC      arch/x86/mm/mmap.o
+
+VM236:2   CC      arch/x86/mm/pat.o
+
+VM236:2   CC      arch/x86/mm/pgtable.o
+
+VM236:2   CC      arch/x86/mm/physaddr.o
+
+VM236:2   CC      arch/x86/mm/gup.o
+
+VM236:2   CC      arch/x86/mm/setup_nx.o
+
+VM236:2   CC      arch/x86/mm/tlb.o
+
+VM236:2   CC      arch/x86/mm/pat_rbtree.o
+
+VM236:2   CC      arch/x86/mm/hugetlbpage.o
+
+VM236:2   CC      arch/x86/mm/pkeys.o
+
+VM236:2   LD      arch/x86/mm/built-in.o
+
+VM236:2   CC      arch/x86/platform/atom/pmc_atom.o
+
+VM236:2   LD      arch/x86/platform/atom/built-in.o
+
+VM236:2   LD      arch/x86/platform/mellanox/built-in.o
+
+VM236:2   LD      arch/x86/platform/built-in.o
+
+VM236:2   CC      arch/x86/realmode/init.o
+
+VM236:2   AS      arch/x86/realmode/rm/header.o
+
+VM236:2   AS      arch/x86/realmode/rm/trampoline_64.o
+
+VM236:2   AS      arch/x86/realmode/rm/stack.o
+
+VM236:2   AS      arch/x86/realmode/rm/reboot.o
+
+VM236:2   AS      arch/x86/realmode/rm/wakeup_asm.o
+
+VM236:2   CC      arch/x86/realmode/rm/wakemain.o
+
+VM236:2   CC      arch/x86/realmode/rm/video-mode.o
+
+VM236:2   AS      arch/x86/realmode/rm/copy.o
+
+VM236:2   CC      arch/x86/realmode/rm/regs.o
+
+VM236:2   CC      arch/x86/realmode/rm/video-vga.o
+
+VM236:2   CC      arch/x86/realmode/rm/video-vesa.o
+
+VM236:2   CC      arch/x86/realmode/rm/video-bios.o
+
+VM236:2   PASYMS  arch/x86/realmode/rm/pasyms.h
+
+VM236:2   LDS     arch/x86/realmode/rm/realmode.lds
+
+VM236:2   LD      arch/x86/realmode/rm/realmode.elf
+
+VM236:2   RELOCS  arch/x86/realmode/rm/realmode.relocs
+
+VM236:2   OBJCOPY arch/x86/realmode/rm/realmode.bin
+
+VM236:2   AS      arch/x86/realmode/rmpiggy.o
+
+VM236:2   LD      arch/x86/realmode/built-in.o
+
+VM236:2   LD      arch/x86/built-in.o
+
+VM236:2   CC      kernel/fork.o
+
+VM236:2   CC      kernel/exec_domain.o
+
+VM236:2   CC      kernel/panic.o
+
+VM236:2   CC      kernel/cpu.o
+
+VM236:2   CC      kernel/exit.o
+
+VM236:2   CC      kernel/softirq.o
+
+VM236:2   CC      kernel/resource.o
+
+VM236:2   CC      kernel/sysctl.o
+
+VM236:2   CC      kernel/sysctl_binary.o
+
+VM236:2   CC      kernel/capability.o
+
+VM236:2   CC      kernel/ptrace.o
+
+VM236:2   CC      kernel/user.o
+
+VM236:2   CC      kernel/signal.o
+
+VM236:2   CC      kernel/sys.o
+
+VM236:2   CC      kernel/kmod.o
+
+VM236:2   CC      kernel/workqueue.o
+
+VM236:2   CC      kernel/pid.o
+
+VM236:2   CC      kernel/task_work.o
+
+VM236:2   CC      kernel/extable.o
+
+VM236:2   CC      kernel/params.o
+
+VM236:2   CC      kernel/kthread.o
+
+VM236:2   CC      kernel/sys_ni.o
+
+VM236:2   CC      kernel/nsproxy.o
+
+VM236:2   CC      kernel/notifier.o
+
+VM236:2   CC      kernel/ksysfs.o
+
+VM236:2   CC      kernel/cred.o
+
+VM236:2   CC      kernel/reboot.o
+
+VM236:2   CC      kernel/async.o
+
+VM236:2   CC      kernel/range.o
+
+VM236:2   CC      kernel/smpboot.o
+
+VM236:2   CC      kernel/ucount.o
+
+VM236:2   CC      kernel/groups.o
+
+VM236:2   CC      kernel/bpf/core.o
+
+VM236:2   LD      kernel/bpf/built-in.o
+
+VM236:2   CC      kernel/events/core.o
+
+VM236:2   CC      kernel/events/ring_buffer.o
+
+VM236:2   CC      kernel/events/callchain.o
+
+VM236:2   CC      kernel/events/hw_breakpoint.o
+
+VM236:2   LD      kernel/events/built-in.o
+
+VM236:2   CC      kernel/irq/irqdesc.o
+
+VM236:2   CC      kernel/irq/handle.o
+
+VM236:2   CC      kernel/irq/manage.o
+
+VM236:2   CC      kernel/irq/spurious.o
+
+VM236:2   CC      kernel/irq/resend.o
+
+VM236:2   CC      kernel/irq/chip.o
+
+VM236:2   CC      kernel/irq/dummychip.o
+
+VM236:2   CC      kernel/irq/devres.o
+
+VM236:2   CC      kernel/irq/autoprobe.o
+
+VM236:2   CC      kernel/irq/irqdomain.o
+
+VM236:2   CC      kernel/irq/proc.o
+
+VM236:2   CC      kernel/irq/pm.o
+
+VM236:2   CC      kernel/irq/msi.o
+
+VM236:2   LD      kernel/irq/built-in.o
+
+VM236:2   CC      kernel/locking/mutex.o
+
+VM236:2   CC      kernel/locking/semaphore.o
+
+VM236:2   CC      kernel/locking/rwsem.o
+
+VM236:2   CC      kernel/locking/percpu-rwsem.o
+
+VM236:2   CC      kernel/locking/rtmutex.o
+
+VM236:2   CC      kernel/locking/rwsem-xadd.o
+
+VM236:2   LD      kernel/locking/built-in.o
+
+VM236:2   CC      kernel/power/qos.o
+
+VM236:2   CC      kernel/power/main.o
+
+VM236:2   CC      kernel/power/console.o
+
+VM236:2   CC      kernel/power/process.o
+
+VM236:2   CC      kernel/power/suspend.o
+
+VM236:2   CC      kernel/power/hibernate.o
+
+VM236:2   CC      kernel/power/snapshot.o
+
+VM236:2   CC      kernel/power/swap.o
+
+VM236:2   CC      kernel/power/user.o
+
+VM236:2   CC      kernel/power/poweroff.o
+
+VM236:2   LD      kernel/power/built-in.o
+
+VM236:2   CC      kernel/printk/printk.o
+
+VM236:2   CC      kernel/printk/nmi.o
+
+VM236:2   LD      kernel/printk/built-in.o
+
+VM236:2   CC      kernel/rcu/update.o
+
+VM236:2   CC      kernel/rcu/sync.o
+
+VM236:2   CC      kernel/rcu/srcu.o
+
+VM236:2   CC      kernel/rcu/tiny.o
+
+VM236:2   LD      kernel/rcu/built-in.o
+
+VM236:2 ^C
+VM236:2 make[1]: *** [scripts/Makefile.build:544: kernel/sched] Interrupt
+
+VM236:2 make: *** [Makefile:988: kernel] Interrupt
+
+VM236:2 
