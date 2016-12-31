@@ -1,0 +1,154 @@
+$ sudo apt-get install git fakeroot build-essential ncurses-dev xz-utils libssl-dev bc
+$ sudo apt-get install kernel-package
+$ sudo apt-get --no-install-recommends install kernel-package
+$ wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.9.tar.sign<br> $ wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.9.tar.xz
+$ unxz linux-4.9.tar.xz<br> $ gpg --verify linux-4.9.tar.sign
+gpg: assuming signed data in `linux-4.9.tar'
+gpg: Signature made Monday 12 December 2016 01:38:31 AM IST using RSA key ID 00411886
+gpg: Can't check signature: public key not found
+$ gpg --keyserver hkp://keys.gnupg.net --recv-keys 00411886
+gpg: requesting key 00411886 from hkp server keys.gnupg.net
+gpg: /root/.gnupg/trustdb.gpg: trustdb created
+gpg: key 00411886: public key "Linus Torvalds *lt;torvalds@linux-foundation.org&gt;" imported
+gpg: no ultimately trusted keys found
+gpg: Total number processed: 1
+gpg:               imported: 1  (RSA: 1)
+
+$ gpg --verify  linux-4.9.tar.sign 
+gpg: assuming signed data in `linux-4.9.tar'
+gpg: Signature made Monday 12 December 2016 01:38:31 AM IST using RSA key ID 00411886
+gpg: Good signature from "Linus Torvalds &lt;torvalds@linux-foundation.org&gt;"
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: ABAF 11C6 5A29 70B1 30AB  E3C4 79BE 3E43 0041 1886
+$ tar xvf linux-4.9.tar<br> $ ls<br> $ cd linux-4.9<br> $ ls 
+linux-4.9/
+linux-4.9/.cocciconfig
+linux-4.9/.get_maintainer.ignore
+linux-4.9/.gitattributes
+linux-4.9/.gitignore
+linux-4.9/.mailmap
+linux-4.9/COPYING
+linux-4.9/CREDITS
+linux-4.9/Documentation/
+linux-4.9/Documentation/.gitignore
+linux-4.9/Documentation/00-INDEX
+linux-4.9/Documentation/80211/
+linux-4.9/Documentation/80211/cfg80211.rst
+linux-4.9/Documentation/80211/conf.py
+linux-4.9/Documentation/80211/index.rst
+linux-4.9/Documentation/80211/introduction.rst
+linux-4.9/Documentation/80211/mac80211-advanced.rst
+linux-4.9/Documentation/80211/mac80211.rst
+linux-4.9/Documentation/ABI/
+linux-4.9/Documentation/ABI/README
+....
+..
+...
+linux-4.9/virt/kvm/vfio.c
+linux-4.9/virt/kvm/vfio.h
+linux-4.9/virt/lib/
+linux-4.9/virt/lib/Kconfig
+linux-4.9/virt/lib/Makefile
+linux-4.9/virt/lib/irqbypass.c
+
+<br>linux-4.9<br>
+
+arch   COPYING	Documentation  fs	ipc	 kernel       Makefile	README		scripts   tools
+block  CREDITS	drivers        include	Kbuild	 lib	      mm	REPORTING-BUGS	security  usr
+certs  crypto	firmware       init	Kconfig  MAINTAINERS  net	samples		sound	  virt
+$ cd linux-4.9<br> $ cp /boot/config-$(uname -r) .config
+$ make menuconfig
+$ make-kpkg clean
+$ fakeroot make-kpkg --initrd --revision=1.0.NAS kernel_image kernel_headers
+$ fakeroot make-kpkg --initrd --revision=1.0.NAS kernel_image kernel_headers -j 16
+test ! -e debian/control~ || rm -f debian/control~
+dpkg-gencontrol -isp -DArchitecture=amd64 -plinux-headers-4.9.0 \
+                                          -P/home/vivek/linux-4.9/debian/linux-headers-4.9.0/
+dpkg-gencontrol: warning: -isp is deprecated; it is without effect
+create_md5sums_fn () { cd $1 ; find . -type f ! -regex './DEBIAN/.*' ! -regex './var/.*'      -printf '%P\0' | xargs -r0 md5sum &gt; DEBIAN/md5sums ; if [ -z "DEBIAN/md5sums" ] ; then rm -f "DEBIAN/md5sums" ; fi ; } ; create_md5sums_fn                   /home/vivek/linux-4.9/debian/linux-headers-4.9.0
+chown -R root:root                  /home/vivek/linux-4.9/debian/linux-headers-4.9.0
+chmod -R og=rX                      /home/vivek/linux-4.9/debian/linux-headers-4.9.0
+dpkg --build                        /home/vivek/linux-4.9/debian/linux-headers-4.9.0 ..
+dpkg-deb: building package 'linux-headers-4.9.0' in '../linux-headers-4.9.0_1.0.NAS_amd64.deb'.
+cp -pf debian/control.dist          debian/control
+make[2]: Leaving directory '/home/vivek/linux-4.9'
+make[1]: Leaving directory '/home/vivek/linux-4.9'
+
+$ <strong>ls  ../*.deb</strong>
+<kbd>../linux-headers-4.9.0_1.0.NAS_amd64.deb  ../linux-image-4.9.0_1.0.NAS_amd64.deb </kbd>
+$ sudo dpkg -i linux-headers-4.9.0_1.0.NAS_amd64.deb<br> $ sudo dpkg -i linux-image-4.9.0_1.0.NAS_amd64.deb
+Selecting previously unselected package linux-headers-4.9.0.
+(Reading database ... 159894 files and directories currently installed.)
+Preparing to unpack .../linux-headers-4.9.0_1.0.NAS_amd64.deb ...
+Unpacking linux-headers-4.9.0 (1.0.NAS) ...
+Setting up linux-headers-4.9.0 (1.0.NAS) ...
+Examining /etc/kernel/header_postinst.d.
+Selecting previously unselected package linux-image-4.9.0.
+(Reading database ... 181415 files and directories currently installed.)
+Preparing to unpack .../linux-image-4.9.0_1.0.NAS_amd64.deb ...
+Done.
+Unpacking linux-image-4.9.0 (1.0.NAS) ...
+Setting up linux-image-4.9.0 (1.0.NAS) ...
+Running depmod.
+Examining /etc/kernel/postinst.d.
+run-parts: executing /etc/kernel/postinst.d/apt-auto-removal 4.9.0 /boot/vmlinuz-4.9.0
+run-parts: executing /etc/kernel/postinst.d/initramfs-tools 4.9.0 /boot/vmlinuz-4.9.0
+update-initramfs: Generating /boot/initrd.img-4.9.0
+W: mdadm: /etc/mdadm/mdadm.conf defines no arrays.
+run-parts: executing /etc/kernel/postinst.d/pm-utils 4.9.0 /boot/vmlinuz-4.9.0
+run-parts: executing /etc/kernel/postinst.d/unattended-upgrades 4.9.0 /boot/vmlinuz-4.9.0
+run-parts: executing /etc/kernel/postinst.d/update-notifier 4.9.0 /boot/vmlinuz-4.9.0
+run-parts: executing /etc/kernel/postinst.d/zz-update-grub 4.9.0 /boot/vmlinuz-4.9.0
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-4.9.0
+Found initrd image: /boot/initrd.img-4.9.0
+Found linux image: /boot/vmlinuz-4.4.0-53-generic
+Found initrd image: /boot/initrd.img-4.4.0-53-generic
+Found linux image: /boot/vmlinuz-4.4.0-47-generic
+Found initrd image: /boot/initrd.img-4.4.0-47-generic
+Found linux image: /boot/vmlinuz-4.4.0-45-generic
+Found initrd image: /boot/initrd.img-4.4.0-45-generic
+Adding boot menu entry for EFI firmware configuration
+done
+$ sudo reboot
+$ sudo shutdown -r now
+$ uname -a<br> $ uname -r<br> $ uname -mrs<br> $ dmesg | more<br> $ dmesg | egrep -i --color 'error|critical|failed' 
+Linux dellm6700 4.9.0 #1 SMP Mon Dec 12 11:45:55 IST 2016 x86_64 x86_64 x86_64 GNU/Linux
+parallels@ubuntu:/boot$ ls -al
+total 115040
+drwxr-xr-x  3 root root     4096 Sep 22 16:42 .
+drwxr-xr-x 23 root root     4096 Sep 21 19:25 ..
+-rw-r--r--  1 root root  1158016 May  3  2014 abi-3.13.0-24-generic
+-rw-r--r--  1 root root  1162712 Aug 14  2014 abi-3.13.0-34-generic
+-rw-r--r--  1 root root  1165204 Aug 15 07:07 abi-3.13.0-63-generic
+-rw-r--r--  1 root root   165510 May  3  2014 config-3.13.0-24-generic
+-rw-r--r--  1 root root   165611 Aug 14  2014 config-3.13.0-34-generic
+-rw-r--r--  1 root root   165763 Aug 15 07:07 config-3.13.0-63-generic
+-rw-r--r--  1 root root   182704 Sep 22 16:35 config-4.2.0-hell-kernel
+-rw-r--r--  1 root root   182704 Sep 22 15:23 config-4.2.0-hell-kernel.old
+drwxr-xr-x  5 root root     4096 Sep 22 16:42 grub
+-rw-r--r--  1 root root 19096859 Aug 18  2014 initrd.img-3.13.0-24-generic
+-rw-r--r--  1 root root 19145542 Sep  8 10:29 initrd.img-3.13.0-34-generic
+-rw-r--r--  1 root root 19219306 Sep 18 00:24 initrd.img-3.13.0-63-generic
+-rw-r--r--  1 root root 18069958 Sep 22 16:42 initrd.img-4.2.0-hell-kernel
+-rw-r--r--  1 root root   176500 Mar 12  2014 memtest86+.bin
+-rw-r--r--  1 root root   178176 Mar 12  2014 memtest86+.elf
+-rw-r--r--  1 root root   178680 Mar 12  2014 memtest86+_multiboot.bin
+-rw-------  1 root root  3372643 May  3  2014 System.map-3.13.0-24-generic
+-rw-------  1 root root  3381262 Aug 14  2014 System.map-3.13.0-34-generic
+-rw-------  1 root root  3392068 Aug 15 07:07 System.map-3.13.0-63-generic
+-rw-r--r--  1 root root  3663717 Sep 22 16:35 System.map-4.2.0-hell-kernel
+-rw-------  1 root root  5776416 May  3  2014 vmlinuz-3.13.0-24-generic
+-rw-------  1 root root  5797728 Aug 14  2014 vmlinuz-3.13.0-34-generic
+-rw-------  1 root root  5821152 Aug 15 07:07 vmlinuz-3.13.0-63-generic
+-rw-r--r--  1 root root  6118160 Sep 22 16:35 vmlinuz-4.2.0-hell-kernel
+
+fakeroot make-kpkg --initrd --revision=1.0.NAS  -j 16 
+sudo apt-get install libssl-dev build-essential ncurses-dev xz-utils kernel-package
+sudo dpkg -i linux-headers-4.4.0_1.0.NAS_amd64.deb<br> sudo dpkg -i linux-image-4.4.0_1.0.NAS_amd64.deb
+sudo dpkg -i ../linux-headers-4.4.0_1.0.NAS_amd64.deb<br> sudo dpkg -i ../linux-image-4.4.0_1.0.NAS_amd64.deb
+user@PLUS:~$ <strong>dmesg | egrep -i --color 'error|critical|failed' </strong><br> [    7.474368] systemd[1]: Cannot add dependency job for unit display-manager.service, ignoring: Unit display-manager.service failed to load: No such file or directory.<br> [    7.474377] systemd[1]: Cannot add dependency job for unit display-manager.service, ignoring: Unit display-manager.service failed to load: No such file or directory.<br> [   10.513727] EXT4-fs (sda7): re-mounted. Opts: errors=remount-ro<br> user@PLUS:~$
+fakeroot make-kpkg --initrd --revision=1.0.NAS kernel_image kernel_headers -j 16
+/etc/kernel/postinst.d/apt-auto-removal: 84: /etc/kernel/postinst.d/apt-auto-removal: cannot create /etc/apt/apt.conf.d//01autoremove-kernels.dpkg-new: Permission denied<br> run-parts: /etc/kernel/postinst.d/apt-auto-removal exited with return code 2<br> make[3]: *** [install] Error 1<br> make[2]: *** [install] Error 2<br> make[2]: Leaving directory `/home/tron/Desktop/kernel/linux-stable'<br> make[1]: *** [debian/stamp/install/linux-image-4.8.8+] Error 2<br> make[1]: Leaving directory `/home/tron/Desktop/kernel/linux-stable'<br> make: *** [kernel_image] Error 2
+undefined

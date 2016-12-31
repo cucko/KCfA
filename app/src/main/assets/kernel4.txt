@@ -1,0 +1,178 @@
+qemu
+nop
+$ mkdir $HOME/teeny-linux
+$ TOP=$HOME/teeny-linux
+
+$ cd $TOP
+$ curl https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.0.3.tar.xz | tar xJf -
+$ curl http://busybox.net/downloads/busybox-1.23.2.tar.bz2 | tar xjf -
+
+2busybox
+initramfs
+cpio
+busybox
+$ cd $TOP/busybox-1.23.2
+$ mkdir -pv ../obj/busybox-x86
+$ make O=../obj/busybox-x86 defconfig
+
+busybox
+O=
+2busybox
+menuconfig
+$ make O=../obj/busybox-x86 menuconfig
+
+/
+-&gt; Busybox Settings
+  -&gt; Build Options
+[ ] Build BusyBox as a static binary (no shared libs)
+
+busybox
+$ cd ../obj/busybox-x86
+$ make -j2
+$ make install
+
+busybox
+initramfs
+$ mkdir -p $TOP/initramfs/x86-busybox
+$ cd $TOP/initramfs/x86-busybox
+$ mkdir -pv {bin,sbin,etc,proc,sys,usr/{bin,sbin}}
+$ cp -av $TOP/obj/busybox-x86/_install/* .
+
+/etc/passwd
+2init
+$ vim init
+
+$ chmod +x init
+
+cpio
+$ find . -print0 \
+    | cpio --null -ov --format=newc \
+    | gzip -9 &gt; $TOP/obj/initramfs-busybox-x86.cpio.gz
+
+$TOP/obj/initramfs-busybox-x86.cpio.gz
+qemu
+initrd
+-initrd
+x86_64
+$ cd $TOP/linux-4.0.3
+$ make O=../obj/linux-x86-basic x86_64_defconfig
+
+$ make O=../obj/linux-x86-basic kvmconfig
+
+$ make O=../obj/linux-x86-basic -j2
+
+qemu-system-x86_64
+$ cd $TOP
+$ qemu-system-x86_64 \
+    -kernel obj/linux-x86-basic/arch/x86_64/boot/bzImage \
+    -initrd obj/initramfs-busybox-x86.cpio.gz \
+    -nographic -append "console=ttyS0"
+
+Ctl-a c
+qemu
+-enable-kvm
+$ qemu-system-x86_64 \
+    -kernel obj/linux-x86-basic/arch/x86_64/boot/bzImage \
+    -initrd obj/initramfs-busybox-x86.cpio.gz \
+    -nographic -append "console=ttyS0" -enable-kvm
+
+busybox
+x86_64_defconfig
+alldefconfig
+$ cd $TOP/linux-4.0.3
+$ make O=../obj/linux-x86-alldefconfig alldefconfig
+
+nconfig
+menuconfig
+xconfig
+$ make O=../obj/linux-x86-alldefconfig nconfig
+
+-&gt; Device Drivers
+  -&gt; Character devices
+    -&gt; Serial drivers
+
+[*] 8250/16550 and compatible serial support
+[*] Console on 8250/16550 and compatible serial port
+initramfs
+-&gt; General setup
+
+[*] Initial RAM filesystem and RAM disk (initramfs/initrd) support
+gzip
+kvm
+$ make O=../obj/linux-x86-alldefconfig kvmconfig
+
+$ make O=../obj/linux-x86-alldefconfig -j2
+
+$ (cd $TOP; du -hs obj/linux-x86-*/vmlinux)
+18M     obj/linux-x86-basic/vmlinux
+6.0M    obj/linux-x86-alldefconfig/vmlinux
+
+$ qemu-system-x86_64 \
+    -kernel obj/linux-x86-alldefconfig/arch/x86_64/boot/bzImage \
+    -initrd obj/initramfs-busybox-x86.cpio.gz \
+    -nographic -append "console=ttyS0" -enable-kvm
+
+x86_64_defconfig + kvmconfig
+1.73
+alldefconfig + custom stuff + kvmconfig
+0.61
+make
+allnoconfig
+$ cd $TOP/linux-4.0.3
+$ make O=$TOP/obj/linux-x86-allnoconfig allnoconfig
+
+qemu
+[*] 64-bit kernel
+
+-&gt; General setup
+  -&gt; Configure standard kernel features
+[*] Enable support for printk
+[*] Initial RAM filesystem and RAM disk (initramfs/initrd) support
+
+-&gt; Executable file formats / Emulations
+[*] Kernel support for ELF binaries
+[*] Kernel support for scripts starting with #!
+
+-&gt; Device Drivers
+  -&gt; Character devices
+[*] Enable TTY
+
+-&gt; Device Drivers
+  -&gt; Character devices
+    -&gt; Serial drivers
+[*] 8250/16550 and compatible serial support
+[*]   Console on 8250/16550 and compatible serial port
+
+-&gt; File systems
+  -&gt; Pseudo filesystems
+[*] /proc file system support
+[*] sysfs file system support
+
+make kvmconfig
+$ make O=../obj/linux-x86-alldefconfig -j2
+
+x86_64_defconfig
+$ (cd $TOP; du -hs linux-4.0.3/obj-x86-*/vmlinux)
+18M     obj/linux-x86-basic/vmlinux
+6.0M    obj/linux-x86-alldefconfig/vmlinux
+2.6M    obj/linux-x86-allnoconfig/vmlinux
+
+make kvmconfig
+allnoconfig
+alldefconfig
+$ qemu-system-x86_64 \
+    -kernel obj/linux-x86-allnoconfig/arch/x86_64/boot/bzImage \
+    -initrd obj/initramfs-busybox-x86.cpio.gz \
+    -nographic -append "console=ttyS0" -enable-kvm
+
+alldefconfig
+x86_64_defconfig
+kvmconfig
+x86_64_defconfig + kvmconfig
+1.73
+alldefconfig + custom stuff + kvmconfig
+0.61
+allnoconfig + custom stuff
+0.36
+allnoconfig + custom stuff + kvmconfig
+0.39
