@@ -133,6 +133,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, REQUEST_CODE, intent, 0);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 500, pendingIntent);
+        SharedPreferences prefs = getSharedPreferences("settings", 0);
+        long lastCompile = prefs.getLong("lastCompile", 0);
+        if (lastCompile - Calendar.getInstance().getTimeInMillis() > 12 * 60 * 60 * 1000)
+            alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 500, pendingIntent);
+        else
+            alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 12 * 60 * 60 * 1000, pendingIntent);
     }
 }
