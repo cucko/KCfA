@@ -1,11 +1,7 @@
 package com.example.cucko.compilekernelnow;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -21,47 +17,23 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    final int REQUEST_CODE = 1;
     InputStream in;
     BufferedReader reader;
     String line;
     TextView text;
     TextView status;
     String out = "";
-    boolean toCompile = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        SharedPreferences prefs = getSharedPreferences("settings", 0);
-//        long lastCompile = prefs.getLong("lastCompile", 0);
-//        Log.d("lastCompile", DateUtils.formatDateTime(this, lastCompile, DateUtils.FORMAT_ABBREV_RELATIVE | DateUtils.FORMAT_SHOW_TIME));
-//        Log.d("lastCompile", ""+DateUtils.getRelativeDateTimeString(this, lastCompile, DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0));
-//        Log.d("lastCompile", "" + DateUtils.getRelativeTimeSpanString(lastCompile));
-
         text = (TextView) findViewById(R.id.tvOut);
         status = (TextView) findViewById(R.id.tvStatus);
         text.setMovementMethod(new ScrollingMovementMethod());
-        setAlarm();
 
-        if (getIntent() != null && "1" .equals(getIntent().getStringExtra("notification"))) {
-            text.post(new Runnable() {
-                @Override
-                public void run() {
-                    onCompile(null);
-                }
-            });
-        }
     }
-
-//    @Override
-//    protected void onNewIntent(Intent intent) {
-//        if ("1" .equals(intent.getStringExtra("notification")))
-//            onCompile(null);
-//        super.onNewIntent(intent);
-//    }
 
     public void readLine() {
         try {
@@ -94,8 +66,6 @@ public class MainActivity extends AppCompatActivity {
             }
             status.setVisibility(View.VISIBLE);
             text.setVisibility(View.GONE);
-            NotificationManagerCompat.from(this)
-                    .cancel(AlarmReceiver.NOTIFICATION_ID);
 
             SharedPreferences prefs = getSharedPreferences("settings", 0);
             SharedPreferences.Editor edit = prefs.edit();
@@ -129,15 +99,4 @@ public class MainActivity extends AppCompatActivity {
         readLine();
     }
 
-    private void setAlarm() {
-        Intent intent = new Intent(this, AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, REQUEST_CODE, intent, 0);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        SharedPreferences prefs = getSharedPreferences("settings", 0);
-        long lastCompile = prefs.getLong("lastCompile", 0);
-        if (lastCompile - Calendar.getInstance().getTimeInMillis() > 12 * 60 * 60 * 1000)
-            alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 500, pendingIntent);
-        else
-            alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 12 * 60 * 60 * 1000, pendingIntent);
-    }
 }
